@@ -57,12 +57,13 @@ When prompted, enter:
 
 If you only want to fill in one single year, set **Start year** and **End year** to the same value.
 
-### 4️⃣ Wait for the script to finish
+### 4️⃣ Wait for the script to finish  
 
-Because the script repeatedly calls `git commit` to forge the history, it will take some time.  
-(If you worry about security due to the long runtime: the entire script is a **single file** of only **164 lines**, so you can review it quickly; **it is absolutely safe**.)
+Since the script needs to repeatedly call `git commit` to fabricate the commit history, you will have to wait for a while (the waiting time is proportional to the length of the chosen year range).  
 
-After a few minutes, your profile will be covered with green squares!  
+(If the long runtime makes you worry about security: the entire script is stored in **one single file** containing only **164 lines**, so you can quickly review it at any time—it is **absolutely safe**.)  
+
+When the script finishes, your profile page will be filled with large blocks of green squares!  
 ![Show](./picture/target_show.png)
 
 ---
