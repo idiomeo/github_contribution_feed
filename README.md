@@ -1,81 +1,99 @@
-# github_contribution_feed  
+# Github贡献图补全脚本(github_contribution_feed)  
 
-**English** | [中文](./README_CN.md)  
+**中文** | [English](./README.md)      
 
-**Fill in your past GitHub contribution graph with one click**  
+
+**一键补全你的 GitHub 往年贡献图**  
 ![Show](./picture/show.jpg)
+---
+
+## 项目作用
+这是一个轻量级命令行工具，能够**根据你指定的年份范围**，**一次性补全**那些年缺失的 GitHub 贡献记录(不建议直接补完还未过完的年份)。  
+
+**优点：**
+- 只操作 **一个仓库**，且脚本执行时会自动对该仓库进行pull  
+- 从 **每年 1 月 1 日** 开始，按真实日历（365/366 天）补 Commit，自动识别闰年  
+- 支持多次运行、增量追加（即不会覆盖已有历史的追加）    
+- 全程**无临时文件**，最大程度控制读写次数    
 
 ---
 
-## What this project does
+## 开始使用
 
-This is a lightweight command-line tool that can **fill in missing GitHub contribution records for any year range you specify** in one go (it is not recommended to complete a year that has not yet ended).
-
-**Highlights:**
-- Operates on **a single repository only**, and the script automatically performs a `git pull` on that repo before running  
-- Starts **January 1st of every year**, commits once per real calendar day (365/366 days), automatically detects leap years  
-- Supports multiple runs and incremental appends (it never overwrites existing history)  
-- **No temporary files** at any stage, minimizing disk I/O
-
----
-
-## Getting started
-
-### Prerequisites
+### 使用前提
 
 - Python ≥ 3.7  
-- Git is installed locally and the `git` command is available in your shell  
+- 本地已安装 Git 并可以在命令行直接使用**git**命令    
 
-### 1️⃣ Download the script
+
+### 1️⃣ 下载脚本
 ```bash
 git clone https://github.com/idiomeo/github_contribution_feed.git
 cd github_contribution_feed
 ```
 
-### 2️⃣ Create a new repository  
-Create a new repo on GitHub.  
-It is best **not** to initialize it with **README**, **.gitignore**, or **License** files, as shown below:  
-![Show](./picture/creat_new_repo.png)
+### 2️⃣ 新建仓库  
+在Github上新建一个仓库  
+最好不要勾选**README文件**，**.gitignore文件**以及**License文件**      
+如图：  
+![Show](./picture/creat_new_repo.png)  
+  
+  
+仓库可以设置为私人仓库，  
+但设置为私人仓库后必须在个人展示页面将**Contribution settings**中的**Private Contributions**给勾选上。    
+如图：  
+![Show](./picture/setting_tip.png)  
+  
 
-The repo can be private.  
-If you choose private, you **must** tick **Private Contributions** in your profile’s **Contribution settings**, as shown:  
-![Show](./picture/setting_tip.png)
-
-### 3️⃣ One-click run  
-Execute in your terminal:
+### 3️⃣ 一键运行  
+在终端运行指令：
 ```bash
-python main.py
+python main_cn.py
 ```  
+（**main_cn.py**脚本中的提示语为中文，而**main.py**中的提示语则是英文，建议使用**main_cn.py**）  
+
+按提示依次输入：
+- Git 用户名  
+- Git 邮箱    
+- 起始年份（不可早于2008年）  
+- 结束年份（不可早于2008年）  
+- Github的远程仓库地址（你刚刚新建的Github仓库）  
+
+如果你只想补交一年的贡献，那么**起始年份**与**结束年份**都填相同的年份即可
+
+### 4️⃣ 等待脚本执行
+
+由于该脚本需要通过反复调用git进行commit以伪造提交记录，因此你需要等待一段时间(等待时间与年份长短成正比)   
+
+（如果你因为脚本执行时间过长而担心其安全问题：  
+本脚本代码储存于**单文件**且只有**164行**，你可以随时进行快速审阅，**本脚本绝对安全**）  
+
+脚本运行完成后，你的个人资料页就会出现大面积的“绿格子”啦！  
+![Show](./picture/target_show.png)  
+
+---  
+
+（多次对同一仓库运行同一时间段会自动增量追加，不会覆盖原有提交）  
+
+---  
+
+## 小惊喜&小警告
+### 惊喜
+如果你所设置的补全年份早于了你的账户创建年份，你会惊喜地发现你的Github个人主页中的贡献图年份列表里出现了更早的年份。   
+（但这只会影响你个人主页所展示的最早年份，不会改变你的账户实际创建日期）   
+
+### 警告
+- 请不要过度增加个人主页所展示的年份数量，以免被封号。   
+- 年份的增加是永久性的、不可逆的（哪怕你删除了贡献仓库，多出的年份也依然会展示在你的主页中），请在使用该特性前作好考虑。  
+- 请不要超前增加年份（比如你在2025年使用该脚本，但却在脚本询问时间段的时候填写了超出2025的年份），那将会有很大的机率被封号！     
 
 
-When prompted, enter:
-- Git username  
-- Git email  
-- Start year (cannot be earlier than 2008)  
-- End year (cannot be earlier than 2008)  
-- GitHub remote URL of the repo you just created  
+---  
 
-If you only want to fill in one single year, set **Start year** and **End year** to the same value.
-
-### 4️⃣ Wait for the script to finish  
-
-Since the script needs to repeatedly call `git commit` to fabricate the commit history, you will have to wait for a while (the waiting time is proportional to the length of the chosen year range).  
-
-(If the long runtime makes you worry about security: the entire script is stored in **one single file** containing only **164 lines**, so you can quickly review it at any time—it is **absolutely safe**.)  
-
-When the script finishes, your profile page will be filled with large blocks of green squares!  
-![Show](./picture/target_show.png)
+## 声明
+- 使用本仓库内容需遵循[**GPL3.0**协议](./LICENSE)。    
+- **Github官方严禁贡献图滥用，使用该脚本有封号可能，本人对该脚本造成的任何直接或间接后果不负任何责任!**  
 
 ---
 
-(Re-running the script on the same repo and same date range will automatically append new commits without overwriting the old ones.)
-
----
-
-## Disclaimer
-- Usage is governed by the [**GPL 3.0** license](./LICENSE).  
-- **GitHub officially prohibits abuse of the contribution graph; using this script may result in account suspension. The author assumes no responsibility for any direct or indirect consequences arising from the use of this script!**
-
----
-
-**Enjoy your brand-new green wall!**
+**祝你收获一整面绿墙！**
