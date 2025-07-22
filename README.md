@@ -1,6 +1,6 @@
 # Github贡献图补全脚本(github_contribution_feed)  
 
-**中文** | [English](./README.md)      
+**中文** | [English](./README_EN.md)      
 
 
 **一键补全你的 GitHub 往年贡献图**  

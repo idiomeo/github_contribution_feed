@@ -1,6 +1,6 @@
 # github_contribution_feed  
 
-[中文](./README_CN.md) | **English**    
+[中文](./README.md) | **English**    
 
 **Fill in your past GitHub contribution graph with one click**  
 ![Show](./picture/show.jpg)
