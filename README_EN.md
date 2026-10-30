@@ -14,6 +14,7 @@ This is a lightweight command-line tool that can **fill in missing GitHub contri
 **Highlights:**
 - Operates on **a single repository only**, and the script automatically performs a `git pull` on that repo before running  
 - Starts **January 1st of every year**, commits once per real calendar day (365/366 days), automatically detects leap years  
+- Use `main_month.py` (English) or `main_month_cn.py` (Chinese) for a month range, with a push after each month. Empty months are not pushed, and a failed push stops subsequent months.
 - Supports multiple runs and incremental appends (it never overwrites existing history)  
 - **No temporary files** at any stage, minimizing disk I/O
 
@@ -56,6 +57,19 @@ When prompted, enter:
 - GitHub remote URL of the repo you just created  
 
 If you only want to fill in one single year, set **Start year** and **End year** to the same value.
+
+#### Generate a month range
+
+Run `python main_month.py` for English, or `python main_month_cn.py` for Chinese.
+Enter your Git username, Git email, start month (YYYYMM), end month (YYYYMM), and target GitHub repository URL.
+
+For example, `202312` through `202402` generates only December 2023, January 2024, and February 2024. Both endpoint months are included. Use the same value for both boundaries, such as `202402`, to generate just one month.
+
+- Enter exactly six digits, with a month from `01` to `12`, a year of at least 2008, and a start month no later than the end month.
+- Daily random commit generation is unchanged. Each completed month is pushed separately; a failed push stops subsequent months.
+- Re-running the same range appends more commits. It does not skip existing dates or guarantee that previously missing contributions will appear.
+- All four scripts share the current directory's `contribution_art` repository. An existing repository keeps its configured `origin` and Git identity; entering a new URL or email does not replace them.
+- The original `main.py` and `main_cn.py` retain their year-based inputs.
 
 ### 4️⃣ Wait for the script to finish  
 
